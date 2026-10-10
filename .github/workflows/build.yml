@@ -1,0 +1,51 @@
+name: Build VLogin
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to publish releases
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Build Paper + Velocity
+        run: mvn -B -ntp clean package
+
+      - name: Upload Paper jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: VLogin-Paper
+          path: paper/target/VLogin-Paper-*.jar
+          if-no-files-found: error
+
+      - name: Upload Velocity jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: VLogin-Velocity
+          path: velocity/target/VLogin-Velocity-*.jar
+          if-no-files-found: error
+
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            paper/target/VLogin-Paper-*.jar
+            velocity/target/VLogin-Velocity-*.jar
+          generate_release_notes: true
