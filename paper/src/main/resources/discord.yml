@@ -1,0 +1,27 @@
+# VLogin Discord bot settings.
+# Create a bot at https://discord.com/developers/applications -> Bot -> Reset Token.
+# Invite it with the "bot" and "applications.commands" scopes (no privileged intents needed).
+# NEVER share this file or commit it to GitHub.
+
+enabled: true
+token: "PUT_BOT_TOKEN_HERE"
+
+# Send a DM to every linked Discord user each time that player joins.
+dm-on-join: true
+# Include the player's IP address in that DM.
+show-ip-in-dm: true
+
+# How many Minecraft accounts one Discord user may link.
+max-accounts-per-discord: 5
+
+# Run in-game commands from Discord, as the linked player (they must be online and logged in):
+#   - slash command:  /mc command:spawn
+#   - DM the bot:     +spawn
+commands:
+  enabled: true
+  # Only these commands (first word, no slash) can be run. 
+  allowed:
+    - spawn
+    - home
+  # DANGEROUS: lets ANY command run from Discord. If the player is OP, Discord = full server control.
+  allow-all: false

@@ -1,0 +1,38 @@
+name: VLogin
+version: 1.0.0
+main: dev.vlogin.VLogin
+api-version: '1.21'
+description: Dialog based login with IP sessions, Discord verification, premium login and webhook logs
+softdepend: [floodgate]
+libraries:
+  - net.dv8tion:JDA:5.2.2
+  - org.mindrot:jbcrypt:0.4
+commands:
+  login:
+    description: Log in (fallback for clients without dialogs)
+    usage: /login <password>
+  register:
+    description: Register (fallback for clients without dialogs)
+    usage: /register <password> <password>
+  freemium:
+    description: Generate a code to link your Discord account
+    usage: /freemium
+  unfreemium:
+    description: Unlink a Discord user from your account
+    usage: /unfreemium [discord user]
+  premium:
+    description: Turn on premium (Mojang verified) login
+    usage: /premium
+  unpremium:
+    description: Turn off premium login
+    usage: /unpremium
+  ping:
+    description: Show your ping
+    usage: /ping [player]
+  playersocial:
+    description: Show a player's linked socials
+    usage: /playersocial [player]
+permissions:
+  vlogin.ping.others:
+    description: Check other players' ping
+    default: op

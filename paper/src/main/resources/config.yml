@@ -1,0 +1,33 @@
+# Set to true when this server is behind Velocity AND the VLogin Velocity plugin is installed.
+# Enables: login gate (players stay on the login server until logged in) and premium login.
+velocity: false
+
+session:
+  hours: 5                 # same IP within this many hours of the last login = auto login
+
+password:
+  min-length: 6
+
+login-timeout-seconds: 60  # kick if not logged in by then
+max-failed-attempts: 5
+
+verified:
+  # IP     = verified players skip login only when joining from their last known IP (recommended)
+  # ALWAYS = verified players never need to log in, from ANY IP. Dangerous on offline-mode servers:
+  #          anyone who joins with the same username gets that account (the owner only gets a DM).
+  bypass: IP
+
+bedrock:
+  # Bedrock players (Geyser + Floodgate) are logged in automatically, no password needed.
+  auto-login: true
+
+premium:
+  # If this server itself runs online-mode=true, names are already verified by Mojang,
+  # so players with an account are logged in automatically.
+  online-mode-auto-login: true
+
+code-expire-minutes: 10
+
+webhook:
+  enabled: false
+  url: "https://discord.com/api/webhooks/ID/TOKEN"
